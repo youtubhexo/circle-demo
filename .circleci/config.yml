@@ -5,34 +5,16 @@ jobs:
       - image: circleci/node:10
     branches:
       only:
-        - main
+        - npm
     steps:
       - checkout
       - run:
-          name: Install nvm and Node.js
-          command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # 加载 nvm
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # 加载 nvm bash 补全
-            nvm install 10 # 安装 Node.js 10
-            nvm use 10
-      - run:
-          name: Install Yarn locally
-          command: npm install yarn@1
-      - run:
-          name: Check Yarn version
-          command: yarn --version
-      - run:
-          name: Install Dependencies with Yarn
-          command: yarn install
-      
           name: Install
-          command: yarn install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
           key: dependencies_imooc
       - run:
           name: Build
-          command: yarn build
+          command: npm build
