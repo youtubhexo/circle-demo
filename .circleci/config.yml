@@ -5,16 +5,30 @@ jobs:
       - image: circleci/node:10
     branches:
       only:
-        - npm
+        - master
     steps:
+      - add_ssh_keys:
+        fingerprints:
+          - "Tt0Dml+H6QK2RBUGa9Wfit6XDOT8nSh/lY/qVxsrwDBE"
       - checkout
+      - restore_cache:
+          keys:
+            - dependencies_imooc
       - run:
           name: Install
-          command: npm install
+          command: yarn install
       - save_cache:
           paths:
             - node_modules
           key: dependencies_imooc
       - run:
           name: Build
-          command: npm build
+          command: yarn build
+      # - run:
+      #     name: Prepare shell commands
+      #     # shell chmod +x 赋予执行权限
+      #     # 执行shell脚本
+      #     command: chmod +x scripts/deploy.sh
+      # - run:
+      #     name: Run Deploy to Github pages
+      #     command: ./scripts/deploy.sh
