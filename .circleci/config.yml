@@ -9,6 +9,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Yarn 
+          command: npm install -g yarn@1
+      - run:
           name: Install
           command: yarn install
       - save_cache:
