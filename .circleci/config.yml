@@ -7,9 +7,6 @@ jobs:
       only:
         - master
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:QZAT2vfizAM1iIpbHXiZsN8g0b//tDOVKb7UCM978Sc"
       - checkout
       - run:
           name: Install
