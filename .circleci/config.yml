@@ -7,9 +7,6 @@ jobs:
       only:
         - master
     steps:
-      - add_ssh_keys:
-        fingerprints:
-          - "Tt0Dml+H6QK2RBUGa9Wfit6XDOT8nSh/lY/qVxsrwDBE"
       - checkout
       - restore_cache:
           keys:
