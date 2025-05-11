@@ -3,6 +3,21 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+    branches:
+      only:
+        - master
     steps:
-      - run: echo "心灵星图"
-      - run: npm -v
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:QZAT2vfizAM1iIpbHXiZsN8g0b//tDOVKb7UCM978Sc"
+      - checkout
+      - run:
+          name: Install
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies_imooc
+      - run:
+          name: Build
+          command: yarn build
